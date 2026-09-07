@@ -1,0 +1,22 @@
+{
+  "name": "easytap-nfc-server",
+  "version": "1.0.0",
+  "description": "API de redirección para tags NFC de EasyTap (resuelve /tap/:id contra Google Sheets)",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Alfonso Rodríguez",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "googleapis": "^157.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
