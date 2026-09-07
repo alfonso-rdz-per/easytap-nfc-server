@@ -17,13 +17,13 @@ su destino sin tocar código ni volver a programar el tag.
 
 ```mermaid
 flowchart TD
-    T[Tag NFC] -->|GET /tap/:id| S[Express]
-    S -->|cuenta de servicio| G[(Google Sheet<br/>pestaña Clientes)]
-    G --> F{fila con A == :id}
-    F -->|no existe| E404[404 Cliente no encontrado]
-    F -->|columna G != TRUE| E403[403 NFC desactivado]
-    F -->|sin URL en columna F| E409[409 Sin destino]
-    F -->|ok| R[302 redirect<br/>a la URL de la columna F]
+    T[Tag NFC] -->|"GET /tap/:id"| S[Express]
+    S -->|cuenta de servicio| G[("Google Sheet — pestana Clientes")]
+    G --> F{"fila con A igual a :id"}
+    F -->|no existe| E404["404 Cliente no encontrado"]
+    F -->|"columna G no es TRUE"| E403["403 NFC desactivado"]
+    F -->|"sin URL en columna F"| E409["409 Sin destino"]
+    F -->|ok| R["302 redirect a la URL de la columna F"]
 ```
 
 ## Qué demuestra este proyecto
