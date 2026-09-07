@@ -1,5 +1,10 @@
 # EasyTap — NFC redirect server
 
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express_5-000000?style=flat&logo=express&logoColor=white)
+![Google Sheets API](https://img.shields.io/badge/Google_Sheets_API-34A853?style=flat&logo=googlesheets&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+
 API mínima en **Express** que resuelve las redirecciones de los tags NFC de
 [EasyTap](https://easytap.mx). Cada tag apunta a `https://<host>/tap/<id>`; el
 servidor busca ese `id` en una hoja de Google Sheets y redirige a la URL que el
@@ -10,15 +15,15 @@ su destino sin tocar código ni volver a programar el tag.
 
 ## Cómo funciona
 
-```
-GET /tap/:id
-    │
-    ├─ lee la pestaña "Clientes" de una hoja de Google (cuenta de servicio)
-    ├─ busca la fila cuyo campo A == :id
-    │      404 si no existe
-    │      403 si la columna G ("activo") no es TRUE
-    │      409 si no hay URL de destino
-    └─ 302 redirect a la URL de la columna F
+```mermaid
+flowchart TD
+    T[Tag NFC] -->|GET /tap/:id| S[Express]
+    S -->|cuenta de servicio| G[(Google Sheet<br/>pestaña Clientes)]
+    G --> F{fila con A == :id}
+    F -->|no existe| E404[404 Cliente no encontrado]
+    F -->|columna G != TRUE| E403[403 NFC desactivado]
+    F -->|sin URL en columna F| E409[409 Sin destino]
+    F -->|ok| R[302 redirect<br/>a la URL de la columna F]
 ```
 
 ## Qué demuestra este proyecto
